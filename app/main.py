@@ -8,16 +8,9 @@ def load_geojson_data(path):
     with open(path, 'r') as f:
         return json.load(f)
 
-# Emplacement de votre fichier GeoJSON
-# geojson_file_path = './data/geojson/communes-974-la-reunion.geojson'
-
-# Chargement des données GeoJSON
-# geojson_data = load_geojson_data(geojson_file_path)
-
 # Création de la couche GeoJsonLayer
 geojson_layer = pdk.Layer(
     "GeoJsonLayer",
-    # geojson_data,
     opacity=0.0,
     stroked=False,
     filled=False,
