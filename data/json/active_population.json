@@ -1,0 +1,275 @@
+{
+    "total_count": 1728,
+    "results": [
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974404"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "\u00c9tang-Sal\u00e9"
+            ],
+            "variable_code": "csx_rec4taxtypac_rec2rpop",
+            "value": 206.6322674276294,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Professions interm\u00e9diaires Ch\u00f4meurs",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974407"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Port"
+            ],
+            "variable_code": "csx_rec5taxtypac_rec2rpop",
+            "value": 1550.772522185155,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Employ\u00e9s Ch\u00f4meurs",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974408"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Possession"
+            ],
+            "variable_code": "csx_rec1taxtypac_rec1rpop",
+            "value": 40.310376187768085,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Agriculteurs Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974408"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Possession"
+            ],
+            "variable_code": "csx_rec2taxtypac_rec1rpop",
+            "value": 655.8805708268354,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Artisans, commer\u00e7ants, chefs d'entreprise Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974413"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Saint-Leu"
+            ],
+            "variable_code": "csx_rec6taxtypac_rec2rpop",
+            "value": 1651.7280249806283,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Ouvriers Ch\u00f4meurs",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974416"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Saint-Pierre"
+            ],
+            "variable_code": "csx_rec1taxtypac_rec1rpop",
+            "value": 352.77975052472556,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Agriculteurs Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974418"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Sainte-Marie"
+            ],
+            "variable_code": "csx_rec1taxtypac_rec2rpop",
+            "value": 4.97078847625356,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Agriculteurs Ch\u00f4meurs",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974418"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Sainte-Marie"
+            ],
+            "variable_code": "csx_rec2taxtypac_rec1rpop",
+            "value": 657.8767225514116,
+            "geo_year": "2019",
+            "year": "2017",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Artisans, commer\u00e7ants, chefs d'entreprise Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974401"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Avirons"
+            ],
+            "variable_code": "csx_rec4taxtypac_rec1rpop",
+            "value": 1036.04091678624,
+            "geo_year": "2021",
+            "year": "2019",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Professions interm\u00e9diaires Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        },
+        {
+            "reg_code": [
+                "04"
+            ],
+            "com_arm_code": [
+                "974401"
+            ],
+            "dep_code": [
+                "974"
+            ],
+            "com_arm_name": [
+                "Avirons"
+            ],
+            "variable_code": "csx_rec5taxtypac_rec1rpop",
+            "value": 941.4340139013036,
+            "geo_year": "2021",
+            "year": "2019",
+            "epci_code": null,
+            "epci_name": null,
+            "variable_label": "Employ\u00e9s Actifs ayant un emploi",
+            "dep_name": [
+                "La R\u00e9union"
+            ],
+            "reg_name": [
+                "La R\u00e9union"
+            ]
+        }
+    ]
+}

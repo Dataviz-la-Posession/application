@@ -1,96 +1,33 @@
 import streamlit as st
-import pandas as pd
 import pydeck as pdk
-from urllib.error import URLError
+import json
 
-st.set_page_config(page_title="Mapping Demo", page_icon="🌍")
+# Fonction pour charger des données GeoJSON
+@st.cache(allow_output_mutation=True)
+def load_geojson_data(path):
+    with open(path, 'r') as f:
+        return json.load(f)
 
-st.markdown("# Mapping Demo")
-st.sidebar.header("Mapping Demo")
-st.write(
-    """This demo shows how to use
-[`st.pydeck_chart`](https://docs.streamlit.io/library/api-reference/charts/st.pydeck_chart)
-to display geospatial data."""
+# Emplacement de votre fichier GeoJSON
+geojson_file_path = './data/geojson/communes-974-la-reunion.geojson'
+
+# Chargement des données GeoJSON
+geojson_data = load_geojson_data(geojson_file_path)
+
+# Création de la couche GeoJsonLayer
+geojson_layer = pdk.Layer(
+    "GeoJsonLayer",
+    geojson_data,
+    opacity=0.0,
+    stroked=False,
+    filled=False,
+    extruded=True,
+    wireframe=True,
 )
 
+# Création de la vue initiale de la carte centrée sur Saint-Denis, Île de la Réunion
+view_state = pdk.ViewState(latitude=-20.882057, longitude=55.450675, zoom=10, bearing=0, pitch=45)
+r = pdk.Deck(layers=[geojson_layer], initial_view_state=view_state)
 
-@st.cache_data
-def from_data_file(filename):
-    url = (
-        "http://raw.githubusercontent.com/streamlit/"
-        "example-data/master/hello/v1/%s" % filename
-    )
-    return pd.read_json(url)
-
-
-try:
-    ALL_LAYERS = {
-        "Bike Rentals": pdk.Layer(
-            "HexagonLayer",
-            data=from_data_file("bike_rental_stats.json"),
-            get_position=["lon", "lat"],
-            radius=200,
-            elevation_scale=4,
-            elevation_range=[0, 1000],
-            extruded=True,
-        ),
-        "Bart Stop Exits": pdk.Layer(
-            "ScatterplotLayer",
-            data=from_data_file("bart_stop_stats.json"),
-            get_position=["lon", "lat"],
-            get_color=[200, 30, 0, 160],
-            get_radius="[exits]",
-            radius_scale=0.05,
-        ),
-        "Bart Stop Names": pdk.Layer(
-            "TextLayer",
-            data=from_data_file("bart_stop_stats.json"),
-            get_position=["lon", "lat"],
-            get_text="name",
-            get_color=[0, 0, 0, 200],
-            get_size=15,
-            get_alignment_baseline="'bottom'",
-        ),
-        "Outbound Flow": pdk.Layer(
-            "ArcLayer",
-            data=from_data_file("bart_path_stats.json"),
-            get_source_position=["lon", "lat"],
-            get_target_position=["lon2", "lat2"],
-            get_source_color=[200, 30, 0, 160],
-            get_target_color=[200, 30, 0, 160],
-            auto_highlight=True,
-            width_scale=0.0001,
-            get_width="outbound",
-            width_min_pixels=3,
-            width_max_pixels=30,
-        ),
-    }
-    st.sidebar.markdown("### Map Layers")
-    selected_layers = [
-        layer
-        for layer_name, layer in ALL_LAYERS.items()
-        if st.sidebar.checkbox(layer_name, True)
-    ]
-    if selected_layers:
-        st.pydeck_chart(
-            pdk.Deck(
-                map_style="mapbox://styles/mapbox/light-v9",
-                initial_view_state={
-                    "latitude": 37.76,
-                    "longitude": -122.4,
-                    "zoom": 11,
-                    "pitch": 50,
-                },
-                layers=selected_layers,
-            )
-        )
-    else:
-        st.error("Please choose at least one layer above.")
-except URLError as e:
-    st.error(
-        """
-        **This demo requires internet access.**
-        Connection error: %s
-    """
-        % e.reason
-    )
+# Affichage de la carte dans Streamlit
+st.pydeck_chart(r)
