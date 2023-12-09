@@ -1,8 +1,7 @@
-import json
-import pandas as pd
-import pydeck as pdk
 import streamlit as st
+from api import population
 import plotly.express as px
+
 
 # Configurer la page pour utiliser une mise en page en pleine largeur
 st.set_page_config(layout="wide")
@@ -17,25 +16,20 @@ st.markdown("""
 
 st.markdown("<h1 style='text-align: center'>Dataviz</h1>", unsafe_allow_html=True)
 
-# Chargement des données pour la treemap
-population = pd.read_csv("./data/csv_folder/population-francaise-communespublic.csv", encoding="utf-8", sep=";", na_values="-").fillna(0)
-
 # Obtenez les années uniques dans les données
-annees = population['Année utilisation'].unique()
+annees = population['annee_utilisation'].unique()
 annees.sort()  # Assurez-vous que les années sont dans l'ordre
 
 # Créer un curseur pour sélectionner l'année
 annee_selectionnee = st.slider("Sélectionnez l'année", int(annees.min()), int(annees.max()), int(annees.max()))
-
-
-# Filtrer les données pour l'année sélectionnée
-population_filtree = population[population['Année utilisation'] == annee_selectionnee]
+annee_selectionnee_str = str(annee_selectionnee)
+population_filtree = population[population['annee_utilisation'] == annee_selectionnee_str]
 
 # Création de la treemap
 treemap = px.treemap(population_filtree,
-                     path=["Code arrondissement départemental", "Nom de la commune"],
-                     values="Population totale",
-                     custom_data=["Population totale"])
+                     path=["code_arrondissement", "nom_de_la_commune"],
+                     values="population_totale",
+                     custom_data=["population_totale"])
 
 # Ajouter des annotations pour chaque case du treemap
 for trace in treemap.data:
@@ -46,9 +40,9 @@ for trace in treemap.data:
 
 
 sunburst = px.sunburst(population_filtree,
-                  path=["Code arrondissement départemental", "Nom de la commune"],
-                  values="Population totale",
-                  custom_data=["Population totale"])
+                  path=["code_arrondissement", "nom_de_la_commune"],
+                  values="population_totale",
+                  custom_data=["population_totale"])
 
 # Ajouter et personnaliser les annotations pour chaque section du sunburst
 for trace in sunburst.data:
