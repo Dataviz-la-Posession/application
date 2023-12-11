@@ -18,7 +18,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center'>L'évolution de la population dans une collectivité territoriale</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center'>L'évolution de la population les collectivités territoriales</h1>", unsafe_allow_html=True)
 
 # Obtenez les années uniques dans les données
 annees = population['annee_utilisation'].unique()
@@ -69,15 +69,29 @@ col1, col2, col3 = st.columns(3)
 
 
 with col1.container():
-    st.subheader(f"Population en {annee_selectionnee}")
-    st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
+    st.subheader(f"Population en {annee_n_2}")
+    #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
     
     # Utiliser des balises HTML pour ajuster la taille de police
     st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n2}</p>", unsafe_allow_html=True)
 
-col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
-col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
+#col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
+with col2.container():
+    st.subheader(f"Population en {annee_n_1}")
+    #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
+    
+    # Utiliser des balises HTML pour ajuster la taille de police
+    st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n1}</p>", unsafe_allow_html=True)
+
+
+#col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
 # Afficher l'indicateur KPI pour l'année précédente dans la deuxième colonne
+with col3.container():
+    st.subheader(f"Population en {annee_selectionnee}")
+    #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
+    
+    # Utiliser des balises HTML pour ajuster la taille de police
+    st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value}</p>", unsafe_allow_html=True)
 
 
 
