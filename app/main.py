@@ -53,6 +53,8 @@ population_filtree_n_2 = population[population['annee_utilisation'] == annee_sel
 #indicateur kpi population total
 # Calculer votre indicateur KPI (par exemple, la somme de la population)
 kpi_value = population_filtree['population_totale'].sum()
+if kpi_value == 0:
+    kpi_value = "donnée manquante"
 kpi_value_n1 = population_filtree_n_1['population_totale'].sum()
 if kpi_value_n1 == 0:
     kpi_value_n1 = "donnée manquante"
