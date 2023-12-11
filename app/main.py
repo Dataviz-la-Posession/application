@@ -20,7 +20,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center'>Evolution de la population et de la consammmation élèctrique dans les collectivités territoriales</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center'>Evolution de la population et de la consommmation élèctrique dans les collectivités territoriales</h1>", unsafe_allow_html=True)
 
 # Obtenez les années uniques dans les données
 annees = population['annee_utilisation'].astype(str).unique()
