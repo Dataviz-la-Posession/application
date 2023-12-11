@@ -82,7 +82,7 @@ col1, col2, col3 = st.columns(3)
 
 
 with col1.container():
-    st.subheader(f"Population en {annee_n_2}")
+    st.subheader(f"Population {annee_n_2}")
     #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
     
     # Utiliser des balises HTML pour ajuster la taille de police
@@ -91,7 +91,7 @@ with col1.container():
 
 #col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
 with col2.container():
-    st.subheader(f"Population en {annee_n_1}")
+    st.subheader(f"Population {annee_n_1}")
     #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
     
     # Utiliser des balises HTML pour ajuster la taille de police
@@ -101,7 +101,7 @@ with col2.container():
 #col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
 # Afficher l'indicateur KPI pour l'année précédente dans la deuxième colonne
 with col3.container():
-    st.subheader(f"Population en {annee_selectionnee}")
+    st.subheader(f"Population {annee_selectionnee}")
     #st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
     
     # Utiliser des balises HTML pour ajuster la taille de police
@@ -218,7 +218,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 fig1 = px.bar(population_filtree, x='population_totale', y='nom_de_la_commune', orientation='h',
              labels={'population_totale': 'Population Totale', 'nom_de_la_commune': 'Nom de la Commune'},
-             title=f"Évolution de la population en {annee_selectionnee}")
+             title=f"Évolution de la population {annee_selectionnee}")
 
 # Inverser l'ordre des barres pour avoir la plus récente en haut
 fig1.update_yaxes(categoryorder='total ascending')
