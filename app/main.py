@@ -37,11 +37,17 @@ annee_n_1 = annee_selectionnee - 1
 annee_selectionnee_str_n_1 = str(annee_n_1)
 population_filtree_n_1 = population[population['annee_utilisation'] == annee_selectionnee_str_n_1]
 
+#annee n-2
+annee_n_2 = annee_selectionnee - 2
+annee_selectionnee_str_n_2 = str(annee_n_2)
+population_filtree_n_2 = population[population['annee_utilisation'] == annee_selectionnee_str_n_2]
+
 
 #indicateur kpi population total
 # Calculer votre indicateur KPI (par exemple, la somme de la population)
 kpi_value = population_filtree['population_totale'].sum()
 kpi_value_n1 = population_filtree_n_1['population_totale'].sum()
+kpi_value_n2 = population_filtree_n_2['population_totale'].sum()
 
 # Afficher l'indicateur KPI
 #st.markdown(f"### Population Totale {annee_selectionnee_str}: {kpi_value}")
@@ -50,15 +56,25 @@ kpi_value_n1 = population_filtree_n_1['population_totale'].sum()
 #st.markdown(f"### Population Totale Annee {annee_selectionnee_str_n_1} : {kpi_value_n1}")
 
 # Afficher les indicateurs KPI dans deux colonnes
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 # Afficher l'indicateur KPI pour l'année sélectionnée dans la première colonne
-col1.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
-
+col1.markdown(f"### Population en {annee_n_2}: {kpi_value_n2}")
+col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
+col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
 # Afficher l'indicateur KPI pour l'année précédente dans la deuxième colonne
-col2.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
 
 
+
+
+# Ajouter un séparateur (ligne horizontale)
+# Ajouter une ligne horizontale (séparateur)
+#st.markdown('<hr>', unsafe_allow_html=True)
+# Créer une ligne horizontale personnalisée comme séparateur
+st.markdown('<hr style="height:2px;border-width:0;color:gray;background-color:gray">', unsafe_allow_html=True)
+
+
+st.markdown("### Répartition de la population :", unsafe_allow_html=True)
 # Création de la treemap
 treemap = px.treemap(population_filtree,
                      path=["code_arrondissement", "nom_de_la_commune"],
