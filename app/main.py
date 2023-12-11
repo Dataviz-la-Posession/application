@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from api import population
+from api import conso_nrj
 import plotly.express as px
 import random  # Ajout de l'importation du module random
 #import matplotlib.pyplot as plt
@@ -21,10 +23,14 @@ st.markdown("""
 st.markdown("<h1 style='text-align: center'>Evolution de la population et de la consammmation élèctrique dans les collectivités territoriales</h1>", unsafe_allow_html=True)
 
 # Obtenez les années uniques dans les données
-annees = population['annee_utilisation'].unique()
+annees = population['annee_utilisation'].astype(str).unique()
 annees.sort()  # Assurez-vous que les années sont dans l'ordre
 
+annee_conso = conso_nrj['annee'].astype(str).unique()
+annee_conso.sort() 
 
+# Fusionnez les années uniques tout en maintenant l'ordre
+annees = np.union1d(annees, annee_conso)
 
 
 # Créer un curseur pour sélectionner l'année
@@ -54,6 +60,8 @@ kpi_value_n2 = population_filtree_n_2['population_totale'].sum()
 if kpi_value_n2 == 0:
     kpi_value_n2 = "donnée manquante"
 
+kpi_conso_edf = conso_nrj['consommation_mwh'].sum()
+
 # Afficher l'indicateur KPI
 #st.markdown(f"### Population Totale {annee_selectionnee_str}: {kpi_value}")
 
@@ -79,6 +87,7 @@ with col1.container():
     
     # Utiliser des balises HTML pour ajuster la taille de police
     st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n2}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:24px; font-weight:bold'>{kpi_conso_edf} mwh</p>", unsafe_allow_html=True)
 
 #col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
 with col2.container():

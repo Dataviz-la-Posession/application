@@ -37,3 +37,10 @@ try:
     population = fetch_all_data(url_api)
 except Exception as e:
     print(f"Erreur lors de la récupération des données : {e}")
+
+
+try:
+    url_api = "https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/consommation-annuelle-par-commune0/records"
+    conso_nrj = fetch_all_data(url_api)
+except Exception as e:
+    print(f"Erreur lors de la récupération des données : {e}")
