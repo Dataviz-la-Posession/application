@@ -18,7 +18,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center'>L'évolution de la population les collectivités territoriales</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center'>Evolution de la population et de la consammmation élèctrique dans les collectivités territoriales</h1>", unsafe_allow_html=True)
 
 # Obtenez les années uniques dans les données
 annees = population['annee_utilisation'].unique()
@@ -31,6 +31,7 @@ annees.sort()  # Assurez-vous que les années sont dans l'ordre
 annee_selectionnee = st.slider("Sélectionnez l'année", int(annees.min()), int(annees.max()), int(annees.max()))
 annee_selectionnee_str = str(annee_selectionnee)
 population_filtree = population[population['annee_utilisation'] == annee_selectionnee_str]
+
 
 #annee n-1
 annee_n_1 = annee_selectionnee - 1
@@ -47,7 +48,11 @@ population_filtree_n_2 = population[population['annee_utilisation'] == annee_sel
 # Calculer votre indicateur KPI (par exemple, la somme de la population)
 kpi_value = population_filtree['population_totale'].sum()
 kpi_value_n1 = population_filtree_n_1['population_totale'].sum()
+if kpi_value_n1 == 0:
+    kpi_value_n1 = "donnée manquante"
 kpi_value_n2 = population_filtree_n_2['population_totale'].sum()
+if kpi_value_n2 == 0:
+    kpi_value_n2 = "donnée manquante"
 
 # Afficher l'indicateur KPI
 #st.markdown(f"### Population Totale {annee_selectionnee_str}: {kpi_value}")
