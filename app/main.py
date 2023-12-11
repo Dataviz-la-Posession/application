@@ -59,7 +59,22 @@ kpi_value_n2 = population_filtree_n_2['population_totale'].sum()
 col1, col2, col3 = st.columns(3)
 
 # Afficher l'indicateur KPI pour l'année sélectionnée dans la première colonne
-col1.markdown(f"### Population en {annee_n_2}: {kpi_value_n2}")
+#col1.markdown(f"### Population en {annee_n_2}: {kpi_value_n2}")
+
+
+# Ajouter un style de carte à l'élément Markdown
+# Afficher l'indicateur KPI pour l'année sélectionnée dans la première colonne
+#col1.markdown(f"### Population en {annee_n_2}: {kpi_value_n2}")
+
+
+
+with col1.container():
+    st.subheader(f"Population en {annee_selectionnee}")
+    st.info("Ceci est le nombre démographique pour l'année sélectionnée.")
+    
+    # Utiliser des balises HTML pour ajuster la taille de police
+    st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n2}</p>", unsafe_allow_html=True)
+
 col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
 col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
 # Afficher l'indicateur KPI pour l'année précédente dans la deuxième colonne
