@@ -179,7 +179,7 @@ population_totale = population["population_totale"]
 coll1, coll2, = st.columns(2)
 with coll1.container():
     # Créer un curseur pour sélectionner l'année
-    st.subheader(f"Population par commune")
+    st.subheader(f"Concentration de la population réunionnaise")
 # Afficher les deux cartes dans une même ligne
     st.plotly_chart(fig, use_container_width=True)
 
