@@ -45,17 +45,39 @@ try:
 except Exception as e:
     print(f"Erreur lors de la récupération des données : {e}")
 
+try:
+    url_api = "https://data.regionreunion.com/api/explore/v2.1/catalog/datasets/structure-de-la-population-active-reunion-par-csp-et-activite-par-commune/records"
+    csp = fetch_all_data(url_api)
+except Exception as e:
+    print(f"Erreur lors de la récupération des données : {e}")
+
+
+
 df_population = (populations.groupby("annee_utilisation", as_index=False)["population_totale"]
       .sum()
      )
 #renomme annee_utilisation en année pour la fusion
 df_population = df_population.rename(columns={"annee_utilisation": 'annee'})
-codes4 = sorted(df_population["annee"].unique())
+codes1 = sorted(df_population["annee"].unique())
 df_conso = (conso_nrj.groupby("annee", as_index=False)["consommation_mwh"]
       .sum()
      )
-codes5 = sorted(df_conso["annee"].unique())
+codes2 = sorted(df_conso["annee"].unique())
 df_conso["annee"] = df_conso["annee"].astype(str)
 
 # Fusionner les DataFrames sur la colonne 'annee'
 population = pd.merge(df_population, df_conso, on='annee', how='inner')
+
+
+#creation dataframe populations avec clé_unique code_commune
+df_population_codcom = (populations.groupby("code_insee_commune", as_index=False)["population_totale"]
+      .sum()
+     )
+codes4 = sorted(df_population_codcom["code_insee_commune"].unique())
+
+#creation dataframe conso_nrj avec clé_unique code_insee
+df_conso_edf_codcom = (conso_nrj.groupby("code_insee", as_index=False)["consommation_mwh"]
+      .sum()
+     )
+#codes5 = sorted(conso_nrj["code_insee_commune"].unique())
+
