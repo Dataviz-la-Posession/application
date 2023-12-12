@@ -1,3 +1,4 @@
+import ijson
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -129,11 +130,16 @@ with col3.container():
 st.markdown('<hr style="height:2px;border-width:0;color:gray;background-color:gray">', unsafe_allow_html=True)
 
 
-#chargement du fichier geoson
-import json
+# Lire le fichier GeoJSON en flux et construire la liste des features
+features = []
+with open("./data/json/communes-974-la-reunion.geojson", 'r') as file:
+    for feature in ijson.items(file, 'features.item'):
+        features.append(feature)
 
-with open("./communes-974-la-reunion.geojson") as f:
-    communes = json.loads(f.read())
+# Construire la structure attendue pour communes
+communes = {"features": features}
+
+# Extraire les codes comme auparavant
 codes3 = sorted([f["properties"]["code"] for f in communes["features"]])
 
 # choropleth_mapbox
