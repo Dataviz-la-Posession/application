@@ -132,7 +132,7 @@ st.markdown('<hr style="height:2px;border-width:0;color:gray;background-color:gr
 #chargement du fichier geoson
 import json
 
-with open("communes-974-la-reunion.geojson") as f:
+with open("./communes-974-la-reunion.geojson") as f:
     communes = json.loads(f.read())
 codes3 = sorted([f["properties"]["code"] for f in communes["features"]])
 
