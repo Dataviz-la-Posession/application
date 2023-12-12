@@ -22,11 +22,14 @@ st.markdown("""
 
 st.markdown("<h1 style='text-align: center'>Evolution démographique et consommmation élèctrique à la Réunion</h1>", unsafe_allow_html=True)
 
+
+
+
 # Obtenez les années uniques dans les données
-annees = population['annee_utilisation'].astype(str).unique()
+annees = population['annee'].astype(str).unique()
 annees.sort()  # Assurez-vous que les années sont dans l'ordre
 
-annee_conso = conso_nrj['annee'].astype(str).unique()
+annee_conso = population['annee'].astype(str).unique()
 annee_conso.sort() 
 
 # Fusionnez les années uniques tout en maintenant l'ordre
@@ -36,18 +39,18 @@ annees = np.union1d(annees, annee_conso)
 # Créer un curseur pour sélectionner l'année
 annee_selectionnee = st.slider("Sélectionnez l'année", int(annees.min()), int(annees.max()), int(annees.max()))
 annee_selectionnee_str = str(annee_selectionnee)
-population_filtree = population[population['annee_utilisation'] == annee_selectionnee_str]
+population_filtree = population[population['annee'] == annee_selectionnee_str]
 
 
 #annee n-1
 annee_n_1 = annee_selectionnee - 1
 annee_selectionnee_str_n_1 = str(annee_n_1)
-population_filtree_n_1 = population[population['annee_utilisation'] == annee_selectionnee_str_n_1]
+population_filtree_n_1 = population[population['annee'] == annee_selectionnee_str_n_1]
 
 #annee n-2
 annee_n_2 = annee_selectionnee - 2
 annee_selectionnee_str_n_2 = str(annee_n_2)
-population_filtree_n_2 = population[population['annee_utilisation'] == annee_selectionnee_str_n_2]
+population_filtree_n_2 = population[population['annee'] == annee_selectionnee_str_n_2]
 
 
 #indicateur kpi population total
@@ -62,7 +65,15 @@ kpi_value_n2 = population_filtree_n_2['population_totale'].sum()
 if kpi_value_n2 == 0:
     kpi_value_n2 = "donnée manquante"
 
-kpi_conso_edf = conso_nrj['consommation_mwh'].sum()
+kpi_conso_edf_2 = population_filtree_n_2['consommation_mwh'].sum()
+if kpi_conso_edf_2 == 0:
+    kpi_conso_edf_2 = "donnée manquante"
+kpi_conso_edf_1 = population_filtree_n_1['consommation_mwh'].sum()
+if kpi_conso_edf_1 == 0:
+    kpi_conso_edf_1 = "donnée manquante"
+kpi_conso_edf = population_filtree['consommation_mwh'].sum()
+if kpi_conso_edf == 0:
+    kpi_conso_edf = "donnée manquante"
 
 # Afficher l'indicateur KPI
 #st.markdown(f"### Population Totale {annee_selectionnee_str}: {kpi_value}")
@@ -89,7 +100,7 @@ with col1.container():
     
     # Utiliser des balises HTML pour ajuster la taille de police
     st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n2}</p>", unsafe_allow_html=True)
-    st.markdown(f"<p style='font-size:24px; font-weight:bold'>{kpi_conso_edf} mwh</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:24px; font-weight:bold'>{kpi_conso_edf_2} mwh</p>", unsafe_allow_html=True)
 
 #col2.markdown(f"### Population en {annee_n_1}: {kpi_value_n1}")
 with col2.container():
@@ -98,6 +109,7 @@ with col2.container():
     
     # Utiliser des balises HTML pour ajuster la taille de police
     st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value_n1}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:24px; font-weight:bold'>{kpi_conso_edf_1} mwh</p>", unsafe_allow_html=True)
 
 
 #col3.markdown(f"### Population en {annee_selectionnee}: {kpi_value}")
@@ -108,6 +120,7 @@ with col3.container():
     
     # Utiliser des balises HTML pour ajuster la taille de police
     st.markdown(f"<p style='font-size:48px; font-weight:bold'>{kpi_value}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:24px; font-weight:bold'>{kpi_conso_edf} mwh</p>", unsafe_allow_html=True)
 
 
 
@@ -121,8 +134,8 @@ st.markdown('<hr style="height:2px;border-width:0;color:gray;background-color:gr
 
 st.markdown("### Répartition de la population :", unsafe_allow_html=True)
 # Création de la treemap
-treemap = px.treemap(population_filtree,
-                     path=["code_arrondissement", "nom_de_la_commune"],
+treemap = px.treemap(population,
+                     path=["annee"],
                      values="population_totale",
                      custom_data=["population_totale"])
 
@@ -134,8 +147,8 @@ for trace in treemap.data:
 
 
 
-sunburst = px.sunburst(population_filtree,
-                  path=["code_arrondissement", "nom_de_la_commune"],
+sunburst = px.sunburst(population,
+                  path=["annee"],
                   values="population_totale",
                   custom_data=["population_totale"])
 
@@ -195,7 +208,7 @@ annee_selectionnee = sidebar.slider("Sélectionnez l'année", int(annees['annee_
 
 
 
-annee_selectionner = sidebar.selectbox("Sélectionnez l'année", annees['annee_utilisation'].dt.year.unique())
+#annee_selectionner = sidebar.selectbox("Sélectionnez l'année", annees['annee_utilisation'].dt.year.unique())
 
 
 
@@ -208,7 +221,7 @@ annee_selectionner = sidebar.selectbox("Sélectionnez l'année", annees['annee_u
 #st.metric("Population", kpi_value * 2)
 
 # Créer un graphique avec Plotly Express
-fig = px.bar(population_filtree, x='nom_de_la_commune', y=['population_totale', 'population_totale'],
+fig = px.bar(population_filtree, x='annee', y=['population_totale', 'population_totale'],
              labels={'value': 'Population', 'variable': 'Indicateur'},
              title=f'Indicateurs superposés pour {annee_selectionnee}')
 
@@ -218,8 +231,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 ###############################################graphique en barre horyzontal
 
-fig1 = px.bar(population_filtree, x='population_totale', y='nom_de_la_commune', orientation='h',
-             labels={'population_totale': 'Population Totale', 'nom_de_la_commune': 'Nom de la Commune'},
+fig1 = px.bar(population_filtree, x='annee', y='population_totale', orientation='h',
+             labels={'annee': 'Année', 'population_totale': 'Population total'},
              title=f"Évolution de la population {annee_selectionnee}")
 
 # Inverser l'ordre des barres pour avoir la plus récente en haut
