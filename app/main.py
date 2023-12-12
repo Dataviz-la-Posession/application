@@ -142,11 +142,11 @@ fig = px.choropleth_mapbox(data_frame=df_population_codcom,
                      locations='code_insee_commune',
                      color='population_totale',
                      featureidkey='properties.code',
-                     color_continuous_scale="reds_r",
+                     color_continuous_scale="reds",
                      mapbox_style="open-street-map",
-                     zoom=8.7,
+                     zoom=8.9,
                      center = {"lat": -21.115141, "lon": 55.536384},
-                     opacity=0.3,
+                     opacity=0.5,
                      labels={'Population totale': 'Population totale'}
                     )
 
