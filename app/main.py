@@ -244,43 +244,44 @@ with coll2.container():
 
 
 
-st.markdown("### Population par n° arrondissement", unsafe_allow_html=True)
-# Création de la treemap
-# Création de la treemap
-treemap = px.treemap(populations,
-                     path=["code_arrondissement", "nom_de_la_commune"],
-                     values="population_totale",
-                     custom_data=["population_totale"])
+# Création des onglets
+tab_treemap, tab_sunburst = st.tabs(["Treemap par Arrondissement", "Sunburst par Commune"])
 
-# Ajouter des annotations pour chaque case du treemap
-for trace in treemap.data:
-    trace.text = trace.customdata[0]
-    trace.textposition = 'middle center'
-    trace.textfont = {'color':'white', 'size':15, 'family':"Arial, bold"}
+# Onglet 1: Treemap par Arrondissement
+with tab_treemap:
+    st.markdown("### Population par n° arrondissement", unsafe_allow_html=True)
+    # Création de la treemap
+    treemap = px.treemap(populations,
+                         path=["code_arrondissement", "nom_de_la_commune"],
+                         values="population_totale",
+                         custom_data=["population_totale"])
 
+    # Ajouter des annotations pour chaque case du treemap
+    for trace in treemap.data:
+        trace.text = trace.customdata[0]
+        trace.textposition = 'middle center'
+        trace.textfont = {'color':'white', 'size':15, 'family':"Arial, bold"}
 
-
-sunburst = px.sunburst(populations,
-                  path=["code_arrondissement", "nom_de_la_commune"],
-                  values="population_totale",
-                  custom_data=["population_totale"])
-
-# Ajouter et personnaliser les annotations pour chaque section du sunburst
-for trace in sunburst.data:
-    trace.text = trace.customdata[0]
-    trace.textfont = {'color':'white', 'size':12, 'family':"Arial, bold"}  # Ajustez selon vos besoins
-
-
-
-col1, col2 = st.columns(2)
-
-# Afficher le treemap dans la première colonne
-with col1:
+    # Afficher le treemap
     st.plotly_chart(treemap, use_container_width=True)
 
-# Afficher le sunburst dans la deuxième colonne
-with col2:
+# Onglet 2: Sunburst par Commune
+with tab_sunburst:
+    st.markdown("### Population par Commune", unsafe_allow_html=True)
+    # Création du sunburst
+    sunburst = px.sunburst(populations,
+                           path=["code_arrondissement", "nom_de_la_commune"],
+                           values="population_totale",
+                           custom_data=["population_totale"])
+
+    # Ajouter et personnaliser les annotations pour chaque section du sunburst
+    for trace in sunburst.data:
+        trace.text = trace.customdata[0]
+        trace.textfont = {'color':'white', 'size':12, 'family':"Arial, bold"}
+
+    # Afficher le sunburst
     st.plotly_chart(sunburst, use_container_width=True)
+
 
 # Exemple de données
 annees = pd.DataFrame({'annee_utilisation': pd.date_range(start='2009', end='2019', freq='Y')})
